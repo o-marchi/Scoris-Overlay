@@ -1,0 +1,22 @@
+{
+  "name": "cp4",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "client": "live-server client --port=8080 --no-browser",
+    "server": "nodemon server/server.js",
+    "dev": "npm-run-all --parallel client server"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "nodemon": "^3.1.10",
+    "npm-run-all": "^4.1.5"
+  }
+}
