@@ -22,6 +22,7 @@ export class UsersService {
     });
 
     const saved: User = await this.userRepository.save(entity);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _hidden, ...safe } = saved;
 
     return safe;
@@ -32,21 +33,15 @@ export class UsersService {
   }
 
   async findOne(id: number): Promise<User> {
-    const user = await this.userRepository.findOneBy({ id });
+    return await this.userRepository.findOneByOrFail({ id });
+  }
 
-    if (!user) {
-      throw new Error('User not found');
-    }
-
-    return user;
+  async findOneByEmail(email: string): Promise<User> {
+    return this.userRepository.findOneOrFail({ where: { email } });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.userRepository.findOneBy({ id });
-
-    if (!user) {
-      throw new Error('User not found');
-    }
+    const user: User = await this.userRepository.findOneByOrFail({ id });
 
     if (updateUserDto.password) {
       const password: string = await bcrypt.hash(updateUserDto.password, 12);

@@ -2,7 +2,7 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-discord';
 import { ConfigService } from '@nestjs/config';
-import { AuthPlayer, AuthService } from '../auth.service';
+import { AuthUser, AuthService } from '../auth.service';
 
 @Injectable()
 export class DiscordStrategy extends PassportStrategy(Strategy, 'discord') {
@@ -19,15 +19,7 @@ export class DiscordStrategy extends PassportStrategy(Strategy, 'discord') {
     });
   }
 
-  async validate(
-    accessToken: string,
-    refreshToken: string,
-    profile: Profile,
-  ): Promise<AuthPlayer> {
-    return this.authService.validateDiscordUser(
-      profile,
-      accessToken,
-      refreshToken,
-    );
+  async validate(accessToken: string, refreshToken: string, profile: Profile): Promise<AuthUser> {
+    return this.authService.validateDiscordUser(profile, accessToken, refreshToken);
   }
 }

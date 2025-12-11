@@ -1,58 +1,58 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { Profile } from 'passport-discord';
-import { PlayersService } from '../players/players.service';
-import { Player } from '../players/entities/player.entity';
+import { UsersService } from '../users/users.service';
+import { User } from '../users/entities/user.entity';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
-export type AuthPlayer = Player & {
+export type AuthUser = Omit<User, 'password'> & {
   accessToken: string;
 };
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly playersService: PlayersService,
+    private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateDiscordUser(
-    profile: Profile,
-    accessToken: string,
-    _refreshToken: string,
-  ): Promise<AuthPlayer> {
-    const dto = {
-      email: (profile as any).email ?? null,
-      name: (profile as any).global_name ?? profile.username,
-      discord: {
-        id: profile.id,
-        username: profile.username,
-        globalName: (profile as any).global_name ?? null,
-        avatar: (profile as any).avatar
-          ? this.playersService.buildDiscordAvatarUrl(
-              profile.id,
-              (profile as any).avatar,
-            )
-          : undefined,
-      },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async validateDiscordUser(profile: Profile, accessToken: string, _refreshToken: string): Promise<AuthUser> {
+    const dto: CreateUserDto = {
+      provider: 'Discord',
+      email: profile.email || '',
+      name: profile.username,
+      password: '',
     };
 
-    let player: Player | null = await this.playersService.findByDiscordId(
-      dto.discord.id,
-    );
-
-    if (!player) {
-      player = await this.playersService.create(dto);
-    } else {
-      player = await this.playersService.update(player.id, dto);
-    }
-
-    return {
-      ...player,
-      accessToken,
-    };
+    return this.validateUser(dto, accessToken);
   }
 
-  async signToken(authPlayer: AuthPlayer): Promise<string> {
-    return this.jwtService.signAsync(authPlayer);
+  async validateUser(dto: CreateUserDto, accessToken: string): Promise<AuthUser> {
+    try {
+      // Get user
+      const user: User = await this.usersService.findOneByEmail(dto.email);
+
+      await this.usersService.update(user.id, dto);
+
+      return {
+        ...user,
+        accessToken,
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
+      // create new user
+      const newUser: Omit<User, 'password'> = await this.usersService.create(dto);
+
+      return {
+        ...newUser,
+        accessToken,
+      };
+    }
+  }
+
+  async signToken(authUser: AuthUser): Promise<string> {
+    return this.jwtService.signAsync(authUser);
   }
 }

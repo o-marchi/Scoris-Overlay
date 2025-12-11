@@ -6,13 +6,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { DiscordStrategy } from './strategies/discord.strategy';
-import { PlayersModule } from '../players/players.module';
-import { JwtStrategy } from './strategies/jwt.strategy'; // assumes you have this
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { UsersModule } from '../users/users.module'; // assumes you have this
 
 @Module({
   imports: [
     ConfigModule,
-    PlayersModule,
+    UsersModule,
     PassportModule.register({ defaultStrategy: 'discord', session: false }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
