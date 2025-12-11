@@ -40,10 +40,10 @@ const showModal = ref(false);
     <header>
       <h1 class="title">SCORIS</h1>
       <p class="subtitle">OVERLAY</p>
-
-      <div>
-        <n-button @click="showModal = true">Login</n-button>
-      </div>
     </header>
+
+    <div>
+      <n-button @click="showModal = true">Login</n-button>
+    </div>
   </div>
 </template>
