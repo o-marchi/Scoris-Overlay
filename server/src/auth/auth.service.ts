@@ -23,6 +23,12 @@ export class AuthService {
       email: profile.email || '',
       name: profile.username,
       password: '',
+      avatar: profile.avatar ? this.usersService.buildDiscordAvatarUrl(profile.id, profile.avatar) : undefined,
+      discord: {
+        id: profile.id,
+        username: profile.username,
+        globalName: profile.global_name || undefined,
+      },
     };
 
     return this.validateUser(dto, accessToken);

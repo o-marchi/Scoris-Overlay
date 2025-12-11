@@ -52,4 +52,10 @@ export class UsersService {
 
     return this.userRepository.save(user);
   }
+
+  buildDiscordAvatarUrl(discordId: string, avatarHash: string): string {
+    const isAnimated: boolean = avatarHash.startsWith('a_');
+    const extension: 'gif' | 'png' = isAnimated ? 'gif' : 'png';
+    return `https://cdn.discordapp.com/avatars/${discordId}/${avatarHash}.${extension}`;
+  }
 }
