@@ -42,10 +42,10 @@ export class AuthService {
   async validateGoogleUser(profile: GoogleProfile, accessToken: string, _refreshToken: string): Promise<AuthUser> {
     const dto: CreateUserDto = {
       provider: 'Google',
-      email: profile.emails && profile.emails[0] ? profile.emails[0].value : '',
+      email: profile.emails?.[0]?.value || '',
       name: profile.displayName,
       password: '',
-      avatar: profile.photos && profile.photos[0] ? profile.photos[0].value : undefined,
+      avatar: profile.photos?.[0]?.value || undefined,
       google: {
         id: profile.id,
         displayName: profile.displayName,
