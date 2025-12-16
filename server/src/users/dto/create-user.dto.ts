@@ -22,7 +22,7 @@ export class GoogleProfileDto {
 
   @IsOptional()
   @IsString()
-  username?: string;
+  displayName?: string;
 }
 
 export class CreateUserDto {
@@ -50,6 +50,8 @@ export class CreateUserDto {
   @Type((): typeof DiscordProfileDto => DiscordProfileDto)
   discord?: DiscordProfileDto;
 
+  @IsOptional()
+  @ValidateNested()
   @Type((): typeof GoogleProfileDto => GoogleProfileDto)
   google?: GoogleProfileDto;
 }
