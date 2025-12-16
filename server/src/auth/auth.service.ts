@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import type { Profile } from 'passport-discord';
+import type { Profile as DiscordProfile } from 'passport-discord';
+import type { Profile as GoogleProfile } from 'passport-google-oauth20';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/user.entity';
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -15,9 +16,26 @@ export class AuthService {
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
-
+  
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async validateDiscordUser(profile: Profile, accessToken: string, _refreshToken: string): Promise<AuthUser> {
+  async validateGoogleUser(profile: GoogleProfile, accessToken: string, _refreshToken: string): Promise<AuthUser> {
+    const dto: CreateUserDto = {
+      provider: 'Google',
+      email: profile.emails && profile.emails[0] ? profile.emails[0].value : '',
+      name: profile.displayName,
+      password: '',
+      avatar: profile.photos && profile.photos[0] ? profile.photos[0].value : undefined,
+      google: {
+        id: profile.id,
+        username: profile.displayName,
+      },
+    };
+
+    return this.validateUser(dto, accessToken);
+  }
+  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async validateDiscordUser(profile: DiscordProfile, accessToken: string, _refreshToken: string): Promise<AuthUser> {
     const dto: CreateUserDto = {
       provider: 'Discord',
       email: profile.email || '',

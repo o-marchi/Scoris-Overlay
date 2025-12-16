@@ -58,4 +58,9 @@ export class UsersService {
     const extension: 'gif' | 'png' = isAnimated ? 'gif' : 'png';
     return `https://cdn.discordapp.com/avatars/${discordId}/${avatarHash}.${extension}`;
   }
+
+  // temp
+  buildGoogleAvatarUrl(googleId: string, avatarHash: string): string {
+    return `https://lh3.googleusercontent.com/a-/AOh14Gg${avatarHash};`
+  }
 }

@@ -18,10 +18,17 @@ export class AuthController {
     // Passport handles the redirect to Discord.
   }
 
+  // Google callback
+  @Get('google/callback')
+  @UseGuards(AuthGuard('google'))
+  async googleLogin() {
+    // Passport handles the redirect to Google.
+  }
+  
   // 2) Discord callback
   @Get('discord/callback')
   @UseGuards(AuthGuard('discord'))
-  async discordCallback(@Req() req: express.Request, @Res() res: express.Response) {
+  async handleCallback(@Req() req: express.Request, @Res() res: express.Response) {
     const authUser = req.user as AuthUser;
     const clientUrl: string = this.config.getOrThrow<string>('PUBLIC_CLIENT_URL');
 

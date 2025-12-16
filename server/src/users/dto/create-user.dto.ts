@@ -15,6 +15,16 @@ export class DiscordProfileDto {
   globalName?: string;
 }
 
+export class GoogleProfileDto {
+  @IsOptional()
+  @IsString()
+  id?: string;
+
+  @IsOptional()
+  @IsString()
+  username?: string;
+}
+
 export class CreateUserDto {
   @IsEmail()
   email: string;
@@ -39,4 +49,7 @@ export class CreateUserDto {
   @ValidateNested()
   @Type((): typeof DiscordProfileDto => DiscordProfileDto)
   discord?: DiscordProfileDto;
+
+  @Type((): typeof GoogleProfileDto => GoogleProfileDto)
+  google?: GoogleProfileDto;
 }
