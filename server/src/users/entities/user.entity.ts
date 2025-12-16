@@ -11,6 +11,14 @@ export class DiscordProfile {
   globalName?: string;
 }
 
+export class GoogleProfile {
+  @Column({ nullable: true })
+  id?: string;
+
+  @Column({ nullable: true })
+  displayName?: string;
+}
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -35,6 +43,10 @@ export class User {
   // Discord information
   @Column((): typeof DiscordProfile => DiscordProfile, { prefix: true })
   discord?: DiscordProfile;
+
+  // Discord information
+  @Column((): typeof GoogleProfile => GoogleProfile, { prefix: true })
+  google?: GoogleProfile;
 
   @CreateDateColumn()
   createdAt: Date;

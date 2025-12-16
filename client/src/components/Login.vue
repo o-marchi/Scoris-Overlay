@@ -32,6 +32,8 @@ const logout = () => {
             </template>
 
             <p v-if="user.name">{{ user.name }}</p>
+
+            <img :src="user.avatar" />
           </template>
 
           <n-popover class="login-popover" trigger="click" placement="bottom-end">
