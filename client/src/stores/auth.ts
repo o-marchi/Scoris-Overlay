@@ -56,9 +56,8 @@ export const useAuthStore = defineStore('auth', () => {
     window.location.href = import.meta.env.VITE_API_URL + '/auth/discord';
   } */
 
-  function login(provider : 'google' | 'discord') {
-    //window.location.href = import.meta.env.VITE_API_URL + '/auth/discord';
-    window.location.href = `${import.meta.env.VITE_API_URL}/auth/${provider}/callback`;
+  function login(provider: 'google' | 'discord') {
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/${provider}`;
   }
 
   async function logout() {
