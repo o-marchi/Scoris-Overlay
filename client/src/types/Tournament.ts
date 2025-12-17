@@ -5,8 +5,7 @@
   players: string[];
 };
 
-export type TournamentForm = {
-  id: number;
+export type TournamentDto = {
   name: string;
   type: 'SINGLES' | 'TEAMS';
 };

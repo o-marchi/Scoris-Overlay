@@ -2,10 +2,11 @@
 import { NButton, NInput, NIcon, NFormItem, NRadioGroup, NRadio, NSpace, NForm } from 'naive-ui';
 import type { FormInst } from 'naive-ui';
 import { ref } from 'vue';
-import type { TournamentForm } from '@/types/Tournament.ts';
+import type { Tournament, TournamentDto } from '@/types/Tournament.ts';
+import { createTournament } from '@/services/tournament.ts';
+import { useRouter } from 'vue-router';
 
-const formValue = ref<TournamentForm>({
-  id: null,
+const formValue = ref<TournamentDto>({
   type: 'TEAMS',
   name: '',
 });
@@ -24,15 +25,26 @@ const rules = {
   ],
 };
 
+const router = useRouter();
+
+const submitForm = async () => {
+  const tournament: Tournament = await createTournament(formValue.value);
+
+  if (tournament) {
+    await router.push('/');
+  }
+};
+
 const handleValidateClick = (e: MouseEvent) => {
   e.preventDefault();
 
   formRef.value?.validate((errors) => {
-    if (!errors) {
-      message.value = 'Valid';
-    } else {
+    if (errors) {
       message.value = 'Error';
+      return;
     }
+
+    submitForm();
   });
 };
 </script>
