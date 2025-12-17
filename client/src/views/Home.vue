@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import VueMarkdown from 'vue-markdown-render';
+import { useAuthStore } from '@/stores/auth.ts';
+import { storeToRefs } from 'pinia';
+import Scoris from '@/views/Scoris.vue';
+import Tournaments from '@/views/Tournaments.vue';
+
+const auth = useAuthStore();
+const { user, isAuthenticated } = storeToRefs(auth);
 </script>
 
 <template>
   <div class="home">
-    <div class="content">
-      <div class="item" v-for="i in 4" :key="i">
-        <p>Level {{ i }}</p>
-        <small>Testing shadows</small>
-      </div>
-    </div>
+    <template v-if="isAuthenticated">
+      <Tournaments></Tournaments>
+    </template>
+
+    <template v-else>
+      <Scoris></Scoris>
+    </template>
   </div>
 </template>

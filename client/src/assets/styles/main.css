@@ -31,7 +31,7 @@ html.dark {
 }
 
 body {
-    @apply bg-surface-dim;
+    @apply bg-surface-dim text-text;
 }
 
 /* Semantic level utilities */
