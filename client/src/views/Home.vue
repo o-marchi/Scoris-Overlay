@@ -4,10 +4,11 @@ import VueMarkdown from 'vue-markdown-render';
 </script>
 
 <template>
-  <div>
-    <div class="main-block">
-      <div class="main-block-content">
-        <h1>Home</h1>
+  <div class="home">
+    <div class="content">
+      <div class="item" v-for="i in 4" :key="i">
+        <p>Level {{ i }}</p>
+        <small>Testing shadows</small>
       </div>
     </div>
   </div>

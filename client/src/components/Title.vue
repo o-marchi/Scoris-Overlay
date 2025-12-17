@@ -5,6 +5,7 @@ import { useAuthStore } from '@/stores/auth';
 import { storeToRefs } from 'pinia';
 import { LogoDiscord } from '@vicons/ionicons5';
 import { LogoGoogle } from '@vicons/ionicons5';
+import ThemeToggle from '@/components/ThemeToggle.vue';
 
 const auth = useAuthStore();
 const { isAuthenticated } = storeToRefs(auth);
@@ -43,7 +44,6 @@ const showModal = ref(false);
             <LogoGoogle />
           </n-icon>
         </n-button>
-        
       </div>
     </n-modal>
 
@@ -53,6 +53,7 @@ const showModal = ref(false);
     </header>
 
     <div>
+      <ThemeToggle></ThemeToggle>
       <n-button @click="showModal = true">Login</n-button>
     </div>
   </div>
