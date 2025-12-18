@@ -14,9 +14,11 @@ export class TournamentService {
   ) {}
 
   async create(createTournamentDto: CreateTournamentDto, user: User): Promise<Tournament> {
-    const entity: Tournament = this.tournamentRepository.create({
-      ...createTournamentDto,
-      user,
+    const { attendants, ...data } = createTournamentDto;
+
+    const entity = this.tournamentRepository.create({
+      ...data,
+      user: user,
     });
 
     return this.tournamentRepository.save(entity);

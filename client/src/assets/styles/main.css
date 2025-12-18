@@ -1,164 +1,167 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-    --font-sans: 'Inter', sans-serif;
-    --font-display: 'Oxanium', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Oxanium', sans-serif;
 
-    --color-primary: #EEBF3D;
+  --color-primary: #eebf3d;
 
-    /* Light theme (default) */
-    --color-surface-dim: oklch(0.92 0 264);
-    --color-surface: oklch(0.96 0 264);
-    --color-surface-bright: oklch(1 0 264);
-    --color-text: oklch(0.15 0 264);
-    --color-text-muted: oklch(0.4 0 264);
+  /* Light theme (default) */
+  --color-surface-dim: oklch(0.92 0 264);
+  --color-surface: oklch(0.96 0 264);
+  --color-surface-bright: oklch(1 0 264);
+  --color-text: oklch(0.15 0 264);
+  --color-text-muted: oklch(0.4 0 264);
 
-    --shadow-s: inset 0 1px 2px #ffffff30, 0 1px 2px #00000030, 0 2px 4px #00000015;
-    --shadow-m: inset 0 1px 2px #ffffff50, 0 2px 4px #00000030, 0 4px 8px #00000015;
-    --shadow-l: inset 0 1px 2px #ffffff70, 0 4px 6px #00000030, 0 6px 10px #00000015;
+  --shadow-s: inset 0 1px 2px #ffffff30, 0 1px 2px #00000030, 0 2px 4px #00000015;
+  --shadow-m: inset 0 1px 2px #ffffff50, 0 2px 4px #00000030, 0 4px 8px #00000015;
+  --shadow-l: inset 0 1px 2px #ffffff70, 0 4px 6px #00000030, 0 6px 10px #00000015;
 }
 
 :root {
-    --n-text-color: var(--color-text);
+  --n-text-color: var(--color-text);
 }
 
 html.dark {
-    --color-surface-dim: oklch(0.1 0 264);
-    --color-surface: oklch(0.2 0 264);
-    --color-surface-bright: oklch(0.3 0 264);
-    --color-text: oklch(0.96 0 264);
-    --color-text-muted: oklch(0.76 0 264);
+  --color-surface-dim: oklch(0.1 0 264);
+  --color-surface: oklch(0.2 0 264);
+  --color-surface-bright: oklch(0.3 0 264);
+  --color-text: oklch(0.96 0 264);
+  --color-text-muted: oklch(0.76 0 264);
 }
 
 body {
-    @apply bg-surface-dim text-text;
+  @apply bg-surface-dim text-text;
 }
 
 /* Semantic level utilities */
 .level-0 {
-    background-color: var(--color-surface-dim);
+  background-color: var(--color-surface-dim);
 }
 
 .level-1 {
-    background-color: var(--color-surface);
-    box-shadow: var(--shadow-s);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-s);
 }
 
 .level-2 {
-    background-color: var(--color-surface-bright);
-    box-shadow: var(--shadow-m);
+  background-color: var(--color-surface-bright);
+  box-shadow: var(--shadow-m);
 }
 
 .level-3 {
-    background-color: var(--color-surface-bright);
-    box-shadow: var(--shadow-l);
+  background-color: var(--color-surface-bright);
+  box-shadow: var(--shadow-l);
 }
 
-
 .content {
-    @apply rounded-lg bg-surface;
-    display: flex;
-    width: 800px;
-    align-items: center;
-    justify-content: space-around;
-    padding: 30px 20px;
+  @apply rounded-lg bg-surface;
+  display: flex;
+  width: 800px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px 20px;
 
-    box-shadow: var(--shadow-s);
+  box-shadow: var(--shadow-s);
 }
 
 .item {
-    @apply rounded-lg bg-surface-bright;
-    padding: 10px 30px;
+  @apply rounded-lg bg-surface-bright;
+  padding: 10px 30px;
 
-    p {
-        font-size: 20px;
-    }
+  p {
+    font-size: 20px;
+  }
 
-    small {
-        @apply text-text-muted;
-    }
+  small {
+    @apply text-text-muted;
+  }
 
-    &:nth-child(1) {
-    }
+  &:nth-child(1) {
+  }
 
-    &:nth-child(2) {
-        box-shadow: var(--shadow-s);
-    }
+  &:nth-child(2) {
+    box-shadow: var(--shadow-s);
+  }
 
-    &:nth-child(3) {
-        box-shadow: var(--shadow-m);
-    }
+  &:nth-child(3) {
+    box-shadow: var(--shadow-m);
+  }
 
-    &:nth-child(4) {
-        box-shadow: var(--shadow-l);
-    }
+  &:nth-child(4) {
+    box-shadow: var(--shadow-l);
+  }
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
-    @apply font-display leading-relaxed font-bold text-text;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-display leading-relaxed font-bold text-text;
 }
 
 h1 {
-    @apply text-5xl;
+  @apply text-5xl;
 }
 
 h2 {
-    @apply text-4xl;
+  @apply text-4xl;
 }
 
 h3 {
-    @apply text-3xl font-semibold;
+  @apply text-3xl font-semibold;
 }
 
 h4 {
-    @apply text-2xl font-semibold;
+  @apply text-2xl font-semibold;
 }
 
 h5 {
-    @apply text-xl font-semibold;
+  @apply text-xl font-semibold;
 }
 
 h6 {
-    @apply text-lg font-semibold;
+  @apply text-lg font-semibold;
 }
 
-
 .title-wrapper {
-    display: flex;
-    margin: 20px 0 40px;
+  display: flex;
+  margin: 20px 0 40px;
 
-    header {
-        margin: 0 auto;
-        display: inline-flex;
-        flex-direction: column;
-    }
+  header {
+    margin: 0 auto;
+    display: inline-flex;
+    flex-direction: column;
+  }
 }
 
 .title {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 58px;
-    letter-spacing: 0.1em;
-    margin-bottom: -18px;
-    color: #EEBF3D;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 58px;
+  letter-spacing: 0.1em;
+  margin-bottom: -18px;
+  color: #eebf3d;
 }
 
 .subtitle {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 1.3em;
-    padding-left: 13px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1.3em;
+  padding-left: 13px;
 
-    text-align: center;
-    color: #3d4633;
+  text-align: center;
+  color: #3d4633;
 }
 
 main {
-    display: flex;
-    width: 800px;
-    margin: 0 auto;
+  display: flex;
+  width: 800px;
+  margin: 0 auto;
 }
 
 /*@import "base.css";*/

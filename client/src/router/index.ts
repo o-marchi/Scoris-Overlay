@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import AuthCallbackPage from '@/views/AuthCallbackPage.vue';
 import tournamentRoutes from '@/router/tournament.ts';
+import attendantRoutes from '@/router/attendant.ts';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,10 @@ const router = createRouter({
     {
       path: '/tournament',
       children: tournamentRoutes,
+    },
+    {
+      path: '/attendant',
+      children: attendantRoutes,
     },
   ],
 });

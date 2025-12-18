@@ -16,4 +16,8 @@ export class CreateTournamentDto {
   @IsNumber()
   @IsNotEmpty()
   userId!: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  attendants?: number;
 }

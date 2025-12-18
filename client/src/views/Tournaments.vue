@@ -31,6 +31,8 @@ fetchTournaments();
           New tournament
         </n-space>
       </n-button>
+
+      <n-button tag="a" href="/attendant/new"> New Attendant </n-button>
     </div>
 
     <div v-if="loading">
