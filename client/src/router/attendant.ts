@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router';
 
 const attendantRoutes: RouteRecordRaw[] = [
   {
-    path: 'new',
+    path: 'new/:id',
     name: 'new-attendant',
     component: CreateAttendant,
   },

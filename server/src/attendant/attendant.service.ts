@@ -18,11 +18,14 @@ export class AttendantService {
   ) {}
 
   async create(createAttendantDto: CreateAttendantDto): Promise<Attendant> {
-    const tournament:Tournament = await this.tournamentRepository.findOneOrFail({ where: { id: 2 }, relations: ['attendants'] });
-    
-    const entity:Attendant = this.attendantRepository.create(createAttendantDto);
-    
-    const attendant:Attendant = await this.attendantRepository.save(entity);
+    const tournament: Tournament = await this.tournamentRepository.findOneOrFail({
+      where: { id: createAttendantDto.id },
+      relations: ['attendants'],
+    });
+
+    const entity: Attendant = this.attendantRepository.create(createAttendantDto);
+
+    const attendant: Attendant = await this.attendantRepository.save(entity);
 
     if (!attendant) {
       throw new NotFoundException('Attendant could not be created');

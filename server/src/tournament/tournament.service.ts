@@ -31,7 +31,8 @@ export class TournamentService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} tournament`;
+    return this.tournamentRepository.findOneBy({ id });
+    // return `This action returns a #${id} tournament`;
   }
 
   update(id: number, updateTournamentDto: UpdateTournamentDto) {

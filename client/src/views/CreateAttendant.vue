@@ -1,15 +1,19 @@
 ﻿<script setup lang="ts">
-import { NButton, NInput, NIcon, NFormItem, NRadioGroup, NRadio, NSpace, NForm } from 'naive-ui';
+import { NButton, NInput, NFormItem, NForm } from 'naive-ui';
 import type { FormInst } from 'naive-ui';
 import { ref } from 'vue';
 import type { Attendant, AttendantDto } from '@/types/Attendant.ts';
 import { createAttendant } from '@/services/attendant.ts';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
+const route = useRoute();
 const formValue = ref<AttendantDto>({
   name: '',
   team: '',
+  tournamentId: Number(route.params.id),
 });
+
+console.log('tournament id', route.params.id);
 
 const formRef = ref<FormInst | null>(null);
 
@@ -64,8 +68,8 @@ const handleValidateClick = (e: MouseEvent) => {
           <n-input v-model:value="formValue.team" placeholder="Enter team name" />
         </n-form-item>
 
-        <n-form-item label="Tournament ID" path="tournamentId">
-          <input type="number" v-model:="formValue.tournamentId" placeholder="Enter tournament ID" />
+        <n-form-item label="Tournament ID" path="TournamentID">
+          <input :value="formValue.tournamentId" disabled />
         </n-form-item>
 
         <n-button type="primary" @click="handleValidateClick">Create Attendant</n-button>

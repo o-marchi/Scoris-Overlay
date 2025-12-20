@@ -162,6 +162,26 @@ main {
   display: flex;
   width: 800px;
   margin: 0 auto;
+
+  .tournament-wrapper {
+    @apply flex grow p-2 gap-2;
+  }
+  .tournament-item {
+    @apply flex flex-col min-w-60 min-h-40 p-5 items-center justify-center rounded-lg bg-surface shadow-[--shadow-s] transition;
+
+    &:hover {
+      box-shadow: var(--shadow-m);
+      cursor: pointer;
+    }
+
+    h3 {
+      @apply text-2xl font-semibold mb-2;
+    }
+
+    span {
+      @apply text-text-muted;
+    }
+  }
 }
 
 /*@import "base.css";*/
