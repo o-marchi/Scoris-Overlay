@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import AuthCallbackPage from '@/views/AuthCallbackPage.vue';
+import StyleGuide from '@/views/StyleGuide.vue';
 import tournamentRoutes from '@/router/tournament.ts';
 
 const router = createRouter({
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/auth/callback',
       name: 'auth-callback',
       component: AuthCallbackPage,
+    },
+    {
+      path: '/style-guide',
+      name: 'style-guide',
+      component: StyleGuide,
     },
     {
       path: '/tournament',
