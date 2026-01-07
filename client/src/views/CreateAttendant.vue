@@ -32,7 +32,7 @@ const rules = {
 const router = useRouter();
 
 const submitForm = async () => {
-  const attendant: Attendant = await createAttendant(formValue.value);
+  const attendant: Attendant = await createAttendant(formValue.value, formValue.value.tournamentId);
 
   if (attendant) {
     await router.push('/');

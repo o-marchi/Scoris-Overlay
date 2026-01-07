@@ -8,10 +8,10 @@ import { UpdateAttendantDto } from './dto/update-attendant.dto';
 export class AttendantController {
   constructor(private readonly attendantService: AttendantService) {}
 
-  @Post()
   @UseGuards(AuthGuard('jwt'))
-  create(@Body() createAttendantDto: CreateAttendantDto) {
-    return this.attendantService.create(createAttendantDto);
+  @Post('new/:tournamentId')
+  create(@Param('tournamentId') tournamentId: string, @Body() createAttendantDto: CreateAttendantDto) {
+    return this.attendantService.create(createAttendantDto, +tournamentId);
   }
 
   @Get()

@@ -7,8 +7,8 @@ export const getAttendants = async (): Promise<Attendant[]> => {
   return attendants || [];
 };
 
-export const createAttendant = async (attendantDto: AttendantDto): Promise<Attendant> => {
-  const { data: attendant } = await api.post<Attendant>('/attendant', attendantDto);
-
+export const createAttendant = async (attendantDto: AttendantDto, tournamentId: number): Promise<Attendant> => {
+  const { data: attendant } = await api.post<Attendant>(`/attendant/new/${tournamentId}`, attendantDto);
+  console.log('Created attendant:', tournamentId, attendant);
   return attendant;
 };

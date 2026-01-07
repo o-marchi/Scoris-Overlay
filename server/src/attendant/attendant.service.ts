@@ -17,7 +17,7 @@ export class AttendantService {
     private attendantRepository: Repository<Attendant>,
   ) {}
 
-  async create(createAttendantDto: CreateAttendantDto): Promise<Attendant> {
+  async create(createAttendantDto: CreateAttendantDto, tournamentId: number): Promise<Attendant> {
     const tournament: Tournament = await this.tournamentRepository.findOneOrFail({
       where: { id: createAttendantDto.id },
       relations: ['attendants'],
