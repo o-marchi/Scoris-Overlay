@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Tournament } from '../../tournament/entities/tournament.entity';
 
 export class DiscordProfile {
   @Column({ nullable: true })
@@ -9,6 +10,14 @@ export class DiscordProfile {
 
   @Column({ nullable: true })
   globalName?: string;
+}
+
+export class GoogleProfile {
+  @Column({ nullable: true })
+  id?: string;
+
+  @Column({ nullable: true })
+  displayName?: string;
 }
 
 @Entity('users')
@@ -35,6 +44,13 @@ export class User {
   // Discord information
   @Column((): typeof DiscordProfile => DiscordProfile, { prefix: true })
   discord?: DiscordProfile;
+
+  // Discord information
+  @Column((): typeof GoogleProfile => GoogleProfile, { prefix: true })
+  google?: GoogleProfile;
+
+  @OneToMany(() => Tournament, (tournament) => tournament.user)
+  tournaments!: Tournament[];
 
   @CreateDateColumn()
   createdAt: Date;
