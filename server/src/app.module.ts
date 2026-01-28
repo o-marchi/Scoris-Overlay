@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TournamentModule } from './tournament/tournament.module';
+import { AttendantModule } from './attendant/attendant.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { TournamentModule } from './tournament/tournament.module';
     UsersModule,
     AuthModule,
     TournamentModule,
+    AttendantModule,
   ],
   controllers: [],
   providers: [],

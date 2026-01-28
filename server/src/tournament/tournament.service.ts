@@ -14,9 +14,11 @@ export class TournamentService {
   ) {}
 
   async create(createTournamentDto: CreateTournamentDto, user: User): Promise<Tournament> {
-    const entity: Tournament = this.tournamentRepository.create({
-      ...createTournamentDto,
-      user,
+    const { attendants, ...data } = createTournamentDto;
+
+    const entity = this.tournamentRepository.create({
+      ...data,
+      user: user,
     });
 
     return this.tournamentRepository.save(entity);
@@ -29,7 +31,8 @@ export class TournamentService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} tournament`;
+    return this.tournamentRepository.findOneBy({ id });
+    // return `This action returns a #${id} tournament`;
   }
 
   update(id: number, updateTournamentDto: UpdateTournamentDto) {
